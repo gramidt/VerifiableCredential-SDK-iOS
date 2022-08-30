@@ -10,8 +10,8 @@ Pod::Spec.new do |s|
     s.documentation_url= 'https://github.com/microsoft/VerifiableCredential-SDK-iOS'
     s.source= {
       :git => 'https://github.com/microsoft/VerifiableCredential-SDK-iOS.git',
-      :submodules => true,
-      :tag => s.version
+      :tag => s.version,
+      :submodules => true
     }
 
     s.swift_version = '5.0'
@@ -20,32 +20,25 @@ Pod::Spec.new do |s|
 
     s.subspec 'Secp256k1' do |cs|
         cs.library = 'c++'
-        cs.public_header_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/include/secp256k1.h']
-        # cs.private_header_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/include/*.h']
+        cs.header_mappings_dir = 'Submodules/Secp256k1/bitcoin-core/secp256k1/'
+        cs.header_dir = 'include'
+        cs.public_header_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/include/*.h']
+        cs.private_header_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/src/*.h']
         cs.compiler_flags =
     "-Wno-shorten-64-to-32",
 #   "-Wno-conditional-uninitialized",
 #   "-Wno-long-long",
 #   "-Wno-overlength-strings",
     "-Wno-unused-function"
-        cs.preserve_paths = 'Submodules/Secp256k1/bitcoin-core/secp256k1/{include,src}/*.{c,h}'
-        cs.source_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/{include,src}/*.{c,h}']
-        cs.exclude_files = [  
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_ecdh.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_ecmult.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_internal.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_recover.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_schnorrsig.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_sign.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/bench_verify.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/tests.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/testrand_impl.h",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/testrand.h",
-          # "Submodules/Secp256k1/bitcoin-core/secp256k1/src/*test*.h",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/valgrind_ctime_test.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/gen_context.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/src/tests_exhaustive.c",
-          "Submodules/Secp256k1/bitcoin-core/secp256k1/contrib/*.{c, h}"
+        cs.preserve_paths = 'Submodules/Secp256k1/bitcoin-core/secp256k1/{src,include}/*.{c,h}'
+        cs.source_files = ['Submodules/Secp256k1/bitcoin-core/secp256k1/{src,include}/*.{c,h}']
+        cs.exclude_files = [
+          'Submodules/Secp256k1/bitcoin-core/secp256k1/src/test*.{c,h}',
+          'Submodules/Secp256k1/bitcoin-core/secp256k1/src/*bench*.{c,h}',
+          'Submodules/Secp256k1/bitcoin-core/secp256k1/src/modules/**test*.{c,h}',
+          "Submodules/Secp256k1/bitcoin-core/secp256k1/contrib/*.{c, h}",
+          'Submodules/Secp256k1/bitcoin-core/secp256k1/src/valgrind_ctime_test.c',
+          'Submodules/Secp256k1/bitcoin-core/secp256k1/src/gen_context.c',
        ]
   
         cs.prefix_header_contents = '
