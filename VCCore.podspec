@@ -78,8 +78,8 @@ Pod::Spec.new do |s|
   #define VERSION "0.1"'
           cs.xcconfig = {
               'USE_HEADERMAP' => 'YES',
-              'HEADER_SEARCH_PATHS' => '${PODS_ROOT}/VCCore/**',
-              'USER_HEADER_SEARCH_PATHS' => '${PODS_ROOT}/VCCore/**'
+              'HEADER_SEARCH_PATHS' => '${PODS_TARGET_SRCROOT}/**',
+              'USER_HEADER_SEARCH_PATHS' => '${PODS_TARGET_SRCROOT}/**'
             }
       end
 
